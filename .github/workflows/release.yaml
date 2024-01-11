@@ -29,7 +29,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         uses: azure/setup-helm@v3
 
-      - name: Run chart-releaser
-        uses: helm/chart-releaser-action@v1.6.0
-        env:
-          CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+      - name: Package and Push Chart
+        run: |
+          helm plugin install https://github.com/chartmuseum/helm-push.git
+          helm repo add chartmuseum https://charts.ietf.org
+          helm cm-push --username="${{secrets.HELM_REPO_USERNAME}}" --password="${{secrets.HELM_REPO_PASSWORD}}" charts/analytics chartmuseum
+          helm repo remove chartmuseum
