@@ -41,6 +41,8 @@ spec:
               name: config
             - mountPath: /var/www/html
               name: html-files
+          env:
+            {{- toYaml .Values.env | nindent 12 }}
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
