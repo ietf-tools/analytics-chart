@@ -51,6 +51,8 @@ spec:
           volumeMounts:
             - mountPath: /var/www/html
               name: html-files
+          env:
+            {{- toYaml .Values.env | nindent 12 }}
           resources:
 {{ toYaml .Values.resources | indent 12 }}
     {{- with .Values.nodeSelector }}
