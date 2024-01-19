@@ -6,7 +6,7 @@ replicaCount: 1
 
 image:
   repository: matomo
-  tag: 4.14.2
+  tag: 4.14.2-fpm-alpine
   pullPolicy: IfNotPresent
 
 service:
