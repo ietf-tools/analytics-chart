@@ -46,6 +46,15 @@ spec:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          # Run report archiving every hour
+          command: ["/bin/sh"]
+          args:
+            - "-c"
+            - >
+              while true; do
+                su -s /bin/sh -c '/usr/local/bin/php /var/www/html/console core:archive --url=http://analytics.ietf.org/'
+                sleep 3600  # Run every hour, adjust as needed
+              done
           ports:
             - name: http
               containerPort: 9000
