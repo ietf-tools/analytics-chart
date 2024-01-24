@@ -52,7 +52,7 @@ spec:
             - "-c"
             - >
               while true; do
-                su -s /bin/sh -c '/usr/local/bin/php /var/www/html/console core:archive --url=http://analytics.ietf.org/'
+                /usr/local/bin/php /var/www/html/console core:archive --url=http://analytics.ietf.org/
                 sleep 3600  # Run every hour, adjust as needed
               done
           ports:
